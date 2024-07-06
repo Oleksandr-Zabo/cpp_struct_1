@@ -9,30 +9,50 @@ struct ComplexNumber {
     ComplexNumber(double r, double i) : real(r), imag(i) {}
 
     // Addition
-    ComplexNumber operator+(const ComplexNumber& other) const {
+    ComplexNumber Sum(const ComplexNumber& other) const {
         return ComplexNumber(real + other.real, imag + other.imag);
     }
 
     // Subtraction
-    ComplexNumber operator-(const ComplexNumber& other) const {
+    ComplexNumber Dif(const ComplexNumber& other) const {
         return ComplexNumber(real - other.real, imag - other.imag);
     }
 
     // Multiplication
-    ComplexNumber operator*(const ComplexNumber& other) const {
+    ComplexNumber Mulp(const ComplexNumber& other) const {
         double r = real * other.real - imag * other.imag;
         double i = real * other.imag + imag * other.real;
         return ComplexNumber(r, i);
     }
 
     // Division
-    ComplexNumber operator/(const ComplexNumber& other) const {
+    ComplexNumber Div(const ComplexNumber& other) const {
         double denominator = other.real * other.real + other.imag * other.imag;
         double r = (real * other.real + imag * other.imag) / denominator;
         double i = (imag * other.real - real * other.imag) / denominator;
         return ComplexNumber(r, i);
     }
 };
+
+void sum_complex(ComplexNumber z1, ComplexNumber z2) {
+    ComplexNumber sumResult = z1.Sum(z2);
+    cout << "Sum: " << sumResult.real << " + " << sumResult.imag << "i" << endl;
+}
+
+void dif_complex(ComplexNumber z1, ComplexNumber z2) {
+    ComplexNumber difResult = z1.Dif(z2);
+    cout << "Difference: " << difResult.real << " + " << difResult.imag << "i" << endl;
+}
+
+void mulp_complex(ComplexNumber z1, ComplexNumber z2) {
+    ComplexNumber mulpResult = z1.Mulp(z2);
+    cout << "Product: " << mulpResult.real << " + " << mulpResult.imag << "i" << endl;
+}
+
+void div_complex(ComplexNumber z1, ComplexNumber z2) {
+    ComplexNumber divResult = z1.Div(z2);
+    cout << "Quotient: " << divResult.real << " + " << divResult.imag << "i" << endl;
+}
 
 int main() {
     ComplexNumber z1(2, 3); // 2 + 3i
@@ -43,23 +63,15 @@ int main() {
 
     cout << "Number 2: " << z2.real << " + " << z2.imag << "i" << endl;
 
-    // Perform arithmetic operations
-    ComplexNumber sum = z1 + z2;
-
-    ComplexNumber diff = z1 - z2;
-
-    ComplexNumber product = z1 * z2;
-
-    ComplexNumber quotient = z1 / z2;
 
     // Display results
-    cout << "Sum: " << sum.real << " + " << sum.imag << "i" << endl;
+    sum_complex(z1, z2);
 
-    cout << "Difference: " << diff.real << " + " << diff.imag << "i" << endl;
-    
-    cout << "Product: " << product.real << " + " << product.imag << "i" << endl;
-    
-    cout << "Quotient: " << quotient.real << " + " << quotient.imag << "i" << endl;
+    dif_complex(z1, z2);
+
+    mulp_complex(z1, z2);
+
+    div_complex(z1, z2);
 
     return 0;
 }
